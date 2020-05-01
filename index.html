@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+  <title>VR180 Demo with videojs-vr</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.7.1/video-js.min.css" />
+  <link rel="stylesheet" href="videojs-vr.css"></link>
+</head>
+<body>
+  <h2>VR180 Demo with videojs-vr</h2>
+  <video width="640" height="300" id="videojs-vr-player" class="video-js vjs-default-skin" controls playsinline crossorigin="Anonymous"></video>
+  <ul>
+    <li><a href="#" data-video="https://dncxafsupp3lj.cloudfront.net/20200131/yuWQdLYEElAaBPPJwuPi/7e4738daf0fc5cc8c6bd0bcc6697159f4a62abe7.m3u8">video 1</a></li>
+    <li><a href="#" data-video="https://dncxafsupp3lj.cloudfront.net/20200129/Oq0AqpY4NAcUBHeRBABz/adf22d22b068c3302365d095706c87bd9afde87a.m3u8">video 2 (NFSW)</a></li>
+    <li><a href="#" data-video="https://dncxafsupp3lj.cloudfront.net/20200120/y0ZGNTShCPLBCOPcwjOU/ee25bab3cdf03152547f8094b586f3365825cc8d.m3u8">video 3 (NFSW)</a></li>
+    <li><a href="#" data-video="https://dncxafsupp3lj.cloudfront.net/20200210/A8mESS7KEHXsMcWrGdBw/2f12f905f139b8936c02dc70bab72ab25047d6c8.m3u8">video 4 (NFSW) <em>Starts with black frame</em></a></li>
+    <li><a href="#" data-video="https://dncxafsupp3lj.cloudfront.net/20200203/dyMCqGCg57EVQsxKLeUd/491b5fbb95ed37147cfd8e884fc8a184a3af6ca0.m3u8">video 5 (NFSW) <em>Starts with black frame</em></a></li>
+    <!--<li><a href="#" data-video="7e4738daf0fc5cc8c6bd0bcc6697159f4a62abe7.m3u8">video 5 (NFSW) <em>Starts with black frame</em></a></li>-->
+  </ul>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/video.js/7.7.1/video.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/videojs-vr@1.7.2/dist/videojs-vr.js"></script>
+  <script type="text/javascript">
+    (function(window, videojs) {
+    var player = window.player = videojs('videojs-vr-player');
+    player.mediainfo = player.mediainfo || {};
+    player.mediainfo.projection = '360_TB';
+
+    var vr = window.vr = player.vr({projection: player.mediainfo.projection, debug: true, forceCardboard: false});
+    // player.src({src2: '/vrstream/DASH_4K_180/4K_180_3840x2160_5994_SDR709_cbr25M/4K_180_3840x2160_5994_SDR709_cbr25M_1prof.mpd',src:'//bitmovin-a.akamaihd.net/content/vr-player/playhouse-vr/mpds/105560.mpd', type: 'application/dash+xml'});
+    // player.src({src: 'https://harmonichevcdemo.s3.ap-east-1.amazonaws.com/PANDORA_VRSample_05_3D_180_4K_FEATURE.mp4', type: 'video/mp4'});
+    // player.src({src: '/vrstream2/test.m3u8', type: 'application/x-mpegURL'});
+    // player.src({src: 'eagle-360.mp4', type: 'video/mp4'});
+    // player.src({src: 'BZVR-047_R-3.mp4', type: 'video/mp4'});
+      player.src({src: 'https://dncxafsupp3lj.cloudfront.net/20200131/yuWQdLYEElAaBPPJwuPi/7e4738daf0fc5cc8c6bd0bcc6697159f4a62abe7.m3u8', type: 'application/x-mpegURL'}); // 360 TB
+      let links = document.querySelectorAll('a');
+      links.forEach(link => {
+        link.addEventListener("click", () => {
+          player.src({src: link.getAttribute("data-video"), type: 'application/x-mpegURL'});
+        });
+      });
+    }(window, window.videojs));
+  </script>
+</body>
+</html>
